@@ -14,5 +14,8 @@ with open("output.txt","w") as file:
         last_name = get_name("Last name: ", "Invalid last name")
         ID = get_name ("Enter ID: ", "invalid ID")
         return first_name, last_name, ID
-
     file.write(str((get_user())))
+            
+fin = open("output.txt")
+for element in fin:
+    print(element)

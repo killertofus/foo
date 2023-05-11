@@ -1,6 +1,6 @@
 import re
 with open("output.txt","w") as file:
-    def get_name(inp_prompt: str, err_prompt: str) -> str:
+def get_name(inp_prompt: str, err_prompt: str) -> str:
         is_valid = re.compile(r"^[a-zA-Z]+$").match
         while True:
             name = input(inp_prompt).strip()
@@ -9,11 +9,12 @@ with open("output.txt","w") as file:
                 continue
             return name
 
-    def get_user() -> tuple[str, str]:
-        first_name = get_name("First name: ", "Invalid first name")
-        last_name = get_name("Last name: ", "Invalid last name")
-        ID = get_name ("Enter ID: ", "invalid ID")
-        return first_name, last_name, ID
+def get_user() -> tuple[str, str]:
+    first_name = get_name("First name: ", "Invalid first name")
+    last_name = get_name("Last name: ", "Invalid last name")
+    ID = get_name ("Enter ID: ", "invalid ID")
+    return first_name, last_name, ID
+
     file.write(str((get_user())))
             
 fin = open("output.txt")

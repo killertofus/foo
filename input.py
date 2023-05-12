@@ -1,5 +1,5 @@
+import sqlite3
 import re
-with open("output.txt","w") as file:
 def get_name(inp_prompt: str, err_prompt: str) -> str:
         is_valid = re.compile(r"^[a-zA-Z]+$").match
         while True:
@@ -15,8 +15,27 @@ def get_user() -> tuple[str, str]:
     ID = get_name ("Enter ID: ", "invalid ID")
     return first_name, last_name, ID
 
-    file.write(str((get_user())))
-            
-fin = open("output.txt")
-for element in fin:
-    print(element)
+conn = sqlite3.connect('customer.db')
+cur = conn.cursor()
+
+first_name = input("enter your first name ")
+last_name = input("enter your last name ")
+email = input ("enter your email name ")
+
+cur.execute(f"""
+INSERT INTO customer (
+  first_name,
+  last_name,
+  email
+)
+
+VALUES (
+    '{first_name}',
+    '{last_name}',
+    '{email}'
+)
+""")
+conn.commit()
+
+conn.close()
+

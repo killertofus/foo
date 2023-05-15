@@ -12,7 +12,9 @@ while not re.match("[A-Za-z]+", last_name):
     print("Only letters are allowed")
     last_name = input("enter your last name ")
 email = input ("enter your email name ")
-
+while not re.match(r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", email):
+  print("invalid email")
+  email = input("enter your email ")
 cur.execute(f"""
 INSERT INTO customer (
   first_name,
@@ -29,4 +31,5 @@ VALUES (
 conn.commit()
 
 conn.close()
+
 

@@ -5,27 +5,20 @@ from flask import Flask, session, render_template, request, g
 app = Flask(__name__)
 app.secret_key = "select_a_COMPLEX_secret_key_please"
 
-@app.route("/")
-def index():
-    data = get_db()
-    return str(data)
+@app.route("/", methods=["POST","GET"])
 
-    return "<h1>This is My Starter App</h1>"
+def home():
+    if request.method=="POST":
+        email=request.form["email"]
+        first_name=request.form["first_name"]
+        last_name=request.form["last_name"]
+        return render_template("output.html", first_name =first_name, last_name=last_name, email=email)
+    else:
+        return render_template("index.html")
 
-def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect('customer.db')
-        cursor = db.cursor()
-        cursor.execute("select * from customer ")
-    return cursor.fetchall()
-    return db
-
-@app.teardown_appcontext
-def close_connection(exception):
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.close()
-
+@app.route("/page")
+def page():
+    return "<h1> test </h1>"
 if __name__ == '__main__':
     app.run()
+

@@ -15,11 +15,9 @@ def home():
 
     if request.method=="POST":
         email=request.form["email"]
-        cur.execute("insert into customer (email)  values(?)", [email])
         first_name=request.form["first_name"]
-        cur.execute("insert into customer (first_name) values(?)", [first_name]) 
         last_name=request.form["last_name"]
-        cur.execute("insert into customer (last_name) first_name values(?)", [last_name])
+            cur.execute("insert into customer (last_name, first_name , email) values(?, ?, ?)", [last_name, first_name , email]);
         conn.commit()
         return render_template("output.html", first_name =first_name, last_name=last_name, email=email)
     else:

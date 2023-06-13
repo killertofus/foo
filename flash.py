@@ -28,8 +28,8 @@ def home():
         message = ("test")
         server = smtplib.SMTP("smtp.gmail.com", 587)
         server.starttls()
-        server.login("cinemassacres@gmail.com", os.getenv("password"))
-        server.sendmail("cinemassacres@gmail.com", email, message)
+        server.login("foo@gmail.com", os.getenv("password"))
+        server.sendmail("foo@gmail.com", email, message)
         conn.commit()
         return render_template("output.html", first_name =first_name, last_name=last_name, email=email)
     else:
